@@ -7,10 +7,7 @@ dotenv.config()
 const {DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE} = process.env
 
 const pool = mysql.createPool({
-    connectionLimit: 1000,
-    connectTimeout: 60 * 60 * 1000,
-    acquireTimeout: 60 * 60 * 1000,
-    timeout: 60 * 60 * 1000,
+    connectionLimit: 5000,
     host: DB_HOST,
     user: DB_USER,
     password: DB_PASSWORD,

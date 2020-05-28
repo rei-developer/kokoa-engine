@@ -64,38 +64,38 @@ module.exports.getTopics = async ctx => {
     if (category !== '') 
         obj.category = category
     obj.isAllowed = 1
-    const count = await readTopic.count(obj)
+    // const count = await readTopic.count(obj)
     const categories = await readBoard.categories(domain)
-    const notices = await readTopic.notices(domain)
-    if (notices.length > 0) {
-        const jobs = notices.map(notice => new Promise(resolve => {
-            client.get(notice.id, (err, value) => {
-                if (err) 
-                    return resolve(true)
-                const hits = Number(value) || 0
-                notice.hits += hits
-                resolve(true)
-            })
-        }))
-        await Promise.all(jobs)
-    }
+    // const notices = await readTopic.notices(domain)
+    // if (notices.length > 0) {
+    //     const jobs = notices.map(notice => new Promise(resolve => {
+    //         client.get(notice.id, (err, value) => {
+    //             if (err) 
+    //                 return resolve(true)
+    //             const hits = Number(value) || 0
+    //             notice.hits += hits
+    //             resolve(true)
+    //         })
+    //     }))
+    //     await Promise.all(jobs)
+    // }
     const topics = await readTopic.topics(obj, searches, page, limit)
-    if (topics.length > 0) {
-        const jobs = topics.map(topic => new Promise(resolve => {
-            client.get(topic.id, (err, value) => {
-                if (err) 
-                    return resolve(true)
-                const hits = Number(value) || 0
-                topic.hits += hits
-                resolve(true)
-            })
-        }))
-        await Promise.all(jobs)
-    }
+    // if (topics.length > 0) {
+    //     const jobs = topics.map(topic => new Promise(resolve => {
+    //         client.get(topic.id, (err, value) => {
+    //             if (err) 
+    //                 return resolve(true)
+    //             const hits = Number(value) || 0
+    //             topic.hits += hits
+    //             resolve(true)
+    //         })
+    //     }))
+    //     await Promise.all(jobs)
+    // }
     ctx.body = {
-        count,
+        count: [],
         categories,
-        notices,
+        notices:[],
         topics
     }
 }

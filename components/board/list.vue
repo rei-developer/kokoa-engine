@@ -387,6 +387,7 @@
                 this.getData(false)
             },
             getCount: async function() {
+                return
                 const data = await this.$axios.$get(`/api/topic/count/${this.domain}`)
                 if (data.status === 'fail')
 					return
