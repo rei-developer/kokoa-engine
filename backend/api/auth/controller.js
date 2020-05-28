@@ -7,9 +7,6 @@ const SendMail = require('../../lib/email')
 const createUser = require('../../database/user/createUser')
 const readUser = require('../../database/user/readUser')
 const updateUser = require('../../database/user/updateUser')
-// const dotenv = require('dotenv')
-
-// dotenv.config()
 
 const hasher = bkfd2Password()
 
@@ -37,7 +34,7 @@ exports.getAuth = async ctx => {
                     // 인증하지 않았습니다.', status: 'fail' })
                 const token = jwt.sign({
                     jti: user.id
-                }, 'apple', {expiresIn: '30d'}) // process.env.JWT_SECRET
+                }, process.env.JWT_SECRET, {expiresIn: '30d'})
                 resolve({token, status: 'ok'})
             })
         })
