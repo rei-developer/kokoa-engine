@@ -119,11 +119,13 @@
                 this.getData(false)
             },
             realtimeUpdate() {
-				setTimeout(async () => {
+				const update = setTimeout(async () => {
                     if (this.page === 0)
                         this.getData()
                     this.realtimeUpdate()
-				}, 3000)
+                }, 30000)
+                if (this.$nuxt.$route.name !== 'index')
+                    clearTimeout(update)
             },
             imageUrlAlt(event) {
                 event.target.src = 'https://github.com/u3u.png'

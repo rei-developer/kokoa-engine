@@ -431,13 +431,14 @@
                 this.$store.commit('forceUpdate')
             },
             realtimeUpdate() {
-				setTimeout(async () => {
+                const update = setTimeout(async () => {
                     if (this.page === 1 && !this.searches.state) {
 					    this.getData()
                         this.getCount()
                     }
-					this.realtimeUpdate()
-				}, 30000)
+                }, 30000)
+                if (this.$nuxt.$route.name !== 'id' && this.$nuxt.$route.name !== 'board-domain')
+                    clearTimeout(update)
             },
             numberWithCommas(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')

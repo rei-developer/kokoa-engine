@@ -70,10 +70,12 @@
                 return data
             },
             realtimeUpdate() {
-				setTimeout(async () => {
+				const update = setTimeout(async () => {
                     this.getData()
                     this.realtimeUpdate()
-				}, 60000)
+                }, 60000)
+                if (this.$nuxt.$route.name !== 'index')
+                    clearTimeout(update)
             },
             imageUrlAlt(event) {
                 event.target.src = 'https://github.com/u3u.png'

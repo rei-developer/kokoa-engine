@@ -534,10 +534,12 @@
 				}
 			},
 			realtimeUpdate() {
-				setTimeout(async () => {
+				const update = setTimeout(async () => {
                     this.autoWrite()
 					this.realtimeUpdate()
-				}, 30000)
+                }, 30000)
+                if (this.$nuxt.$route.name !== 'board-domain-write')
+                    clearTimeout(update)
             },
 			numberWithCommas(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
