@@ -166,8 +166,8 @@
 </script>
 
 <style lang='less' scope>
-    @primary: #30425f;
-    @primary-focus: #29313E;
+    @primary: #9BA9FB;
+    @primary-focus: #8698FB;
 
     article.comment-write {
         padding: 5px;
@@ -225,7 +225,7 @@
                         padding: .25rem 0;
                         border-radius: .25rem .25rem 0;
                         background-color: #f7f8fa;
-                        color: @primary;
+                        color: #333;
                         font-size: .8rem;
                     }
                     > .submit {

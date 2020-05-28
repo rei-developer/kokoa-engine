@@ -13,26 +13,14 @@ module.exports.getBoardName = domain => {
         case 'feedback':
             name = '건의사항'
             break
+        case 'talk':
+            name = '토크'
+            break
+        case 'girl':
+            name = '연예'
+            break
         case 'anime':
-            name = '애니동'
-            break
-        case 'game':
-            name = '게임동'
-            break
-        case 'nendo':
-            name = '넨도동'
-            break
-        case 'music':
-            name = '음악동'
-            break
-        case 'draw':
-            name = '그림동'
-            break
-        case 'news':
-            name = '뉴스동'
-            break
-        case 'review':
-            name = '리뷰동'
+            name = '애니'
             break
     }
     return name

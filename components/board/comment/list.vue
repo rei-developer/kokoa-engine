@@ -306,7 +306,7 @@
 </script>
 
 <style lang='less' scope>
-    @primary: #30425f;
+    @primary: #9BA9FB;
 
     article.comment-view {
         > h6 {
@@ -315,7 +315,7 @@
             padding: .5rem 0 0 5px;
             color: #fff;
             font-size: 14px;
-            border-bottom: 1px solid rgba(0, 0, 0, .2);
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             background-color: @primary;
@@ -394,7 +394,10 @@
                                     overflow-wrap: break-word;
                                 }
                             }
-                            &.writer > span { color: #2d99e1 }
+                            &.writer > span {
+                                color: #061EA4;
+                                font-weight: 700;
+                            }
                         }
                     }
                     > .more {
@@ -416,7 +419,6 @@
                                 position: absolute;
                                 top: calc(50% - 8px);
                                 margin-left: 8px;
-                                color: @primary;
                             }
                         }
                     }

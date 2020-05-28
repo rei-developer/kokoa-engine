@@ -23,12 +23,12 @@
                     buttons
                     name='radios-btn-default'/>
                 <span v-if='$store.state.user.isLogged'>
-                    <nuxt-link :to='`/board/anime/write`'>
+                    <nuxt-link :to='`/board/girl/write`'>
                         <b-button
                             class='float-right'
                             size='sm'
                             variant='primary'
-                            @shortkey='$router.push({ path: "/board/anime/write" })'>
+                            @shortkey='$router.push({ path: "/board/girl/write" })'>
                             <font-awesome-icon icon='pencil-alt'/>
                             쓰기
                         </b-button>

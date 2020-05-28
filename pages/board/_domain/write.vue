@@ -559,7 +559,7 @@
 </script>
 
 <style lang='less' scoped>
-	@primary: #30425f;
+	@primary: #9BA9FB;
 
 	.client-only-placeholder {
 		height: 385px;

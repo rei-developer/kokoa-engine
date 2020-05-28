@@ -139,6 +139,8 @@
 </script>
 
 <style lang='less' scope>
+    @primary: #9BA9FB;
+
     body { background-color: #F9F9F9 }
 
     section {
@@ -149,7 +151,7 @@
     header.header {
         margin-bottom: 1rem;
         // background-image: url(/navbg.jpg);
-        background-color: blue;
+        background-color: @primary;
         box-shadow: 1px 1px 8px rgba(0, 0, 0, .25);
     }
 

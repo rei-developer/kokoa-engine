@@ -14,7 +14,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: '아이돌보드 - K-POP, ITZY, 트와이스, 프로듀스48, 프로듀스101, 프로미스나인, 아이즈원, 버스터즈' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/icon.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito&display=swap' }
     ],
     script: [

@@ -97,7 +97,7 @@
                 <div class='qrcode'>
                     <client-only>
                         <qriously
-                            foreground='#30425f'
+                            foreground='#9BA9FB'
                             :padding='0'
                             :value='`https://www.idolboard.com/${id}`'
                             :size='80'/>
@@ -366,8 +366,8 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #30425f;
-    @primary-focus: #29313E;
+    @primary: #9BA9FB;
+    @primary-focus: #8698FB;
 
     // desktop
     article.topic-view {
@@ -378,7 +378,7 @@
             margin: 0;
             padding: .5rem;
             color: #fff;
-            border-bottom: 1px solid rgba(0, 0, 0, .2);
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             background-color: @primary;

@@ -33,13 +33,13 @@
         </article>
         <article class='side'>
             <ul>
-                <li>
+                <li class='active'>
                     <nuxt-link to='/board/talk'>토크</nuxt-link>
                 </li>
-                <li class='active'>
+                <li>
                     <nuxt-link to='/board/girl'>연예</nuxt-link>
                 </li>
-                <li class='active'>
+                <li>
                     <nuxt-link to='/board/anime'>애니</nuxt-link>
                 </li>
             </ul>
@@ -51,7 +51,7 @@
             </nuxt-link>
         </article> -->
         <article class='shortcut'>
-            <nuxt-link to='/1784'>
+            <nuxt-link to='/12'>
                 <font-awesome-icon icon='check-square'/>
                 아이돌보드 단축키 안내
             </nuxt-link>

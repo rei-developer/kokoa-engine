@@ -107,7 +107,7 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #30425f;
+    @primary: #9BA9FB;
 
     article.widget {
         width: 100%;
@@ -187,7 +187,7 @@
                 margin: 0;
                 padding: .5rem 0 0 5px;
                 font-size: 14px;
-                border-bottom: 1px solid rgba(0, 0, 0, .2);
+                border-bottom: 1px solid rgba(0, 0, 0, .1);
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
                 background-color: @primary;
@@ -263,21 +263,6 @@
                                     font-weight: normal;
                                     > span:nth-child(2) { margin: 0 .5rem }
                                 }
-                                > .author {
-                                    position: absolute;
-                                    right: 0;
-                                    bottom: 5px;
-                                    margin-right: 5px;
-                                    color: @primary;
-                                    font-weight: bold;
-                                    > img:nth-child(1) { margin-top: -3px }
-                                    > img:nth-child(2) {
-                                        width: 16px;
-                                        height: 16px;
-                                        margin-top: -3px;
-                                        border-radius: 2px;
-                                    }
-                                }
                             }
                             > .comment {
                                 width: 40px;
@@ -287,7 +272,7 @@
                                     height: 30px;
                                     margin: 21px 0 0 5px;
                                     padding-top: 5px;
-                                    color: @primary;
+                                    color: #333;
                                     font-size: 12px;
                                     font-weight: 700;
                                     text-align: center;

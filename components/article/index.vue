@@ -133,7 +133,7 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #30425f;
+    @primary: #9BA9FB;
 
     article.widget {
         > .desktop-only {
@@ -209,7 +209,7 @@
                 padding: .5rem 0 0 5px;
                 color: #fff;
                 font-size: 14px;
-                border-bottom: 1px solid rgba(0, 0, 0, .2);
+                border-bottom: 1px solid rgba(0, 0, 0, .1);
                 background-color: @primary;
             }
             > ul {
@@ -273,7 +273,7 @@
                                     height: 30px;
                                     margin: 13px 0 0 5px;
                                     padding-top: 5px;
-                                    color: @primary;
+                                    color: #333;
                                     font-size: 12px;
                                     font-weight: 700;
                                     text-align: center;

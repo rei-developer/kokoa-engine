@@ -103,6 +103,8 @@
 </script>
 
 <style lang='less'>
+    @primary: #9BA9FB;
+    
     nav {
         display: flex;
         position: relative;
@@ -171,7 +173,7 @@
     }
     .b-sidebar-header {
         > .close { color: #fff !important }
-        background-color: #30425f;
+        background-color: @primary;
     }
     .b-sidebar-body {
         > ul {

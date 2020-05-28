@@ -459,12 +459,12 @@
 </script>
 
 <style lang='less' scoped>
-    @primary: #30425f;
+    @primary: #9BA9FB;
     
     article.topic-list {
         > .loading-bar {
             height: 32px;
-            border-bottom: 1px solid rgba(0, 0, 0, .2);
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
             border-radius: 10px 10px 0 0;
             background-color: @primary;
             position: relative;
@@ -482,7 +482,7 @@
                 top: 6px;
                 right: 6px;
                 padding: 0 10px 1px;
-                color: @primary;
+                color: #333;
                 font-size: 12px;
                 border-radius: 7px;
                 background-color: #fff;
@@ -664,7 +664,7 @@
                                 > span.notice, > span.category, > span.newest {
                                     margin-right: 2px;
                                     padding: 2px 4px;
-                                    color: @primary;
+                                    color: #333;
                                     font-size: 11px;
                                     font-weight: 700;
                                     border-radius: 2px;
@@ -691,7 +691,7 @@
                                     right: 0;
                                     bottom: 5px;
                                     margin-right: 5px;
-                                    color: @primary;
+                                    color: #333;
                                     font-weight: bold;
                                     > img:nth-child(1) { margin-top: -3px }
                                     > img:nth-child(2) {
@@ -710,7 +710,7 @@
                                     height: 30px;
                                     margin: 21px 0 0 5px;
                                     padding-top: 5px;
-                                    color: @primary;
+                                    color: #333;
                                     font-size: 12px;
                                     font-weight: 700;
                                     text-align: center;
