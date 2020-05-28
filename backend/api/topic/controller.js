@@ -21,7 +21,7 @@ const deleteNotice = require('../../database/notice/deleteNotice')
 const deletePost = require('../../database/post/deletePost')
 const deleteTopic = require('../../database/topic/deleteTopic')
 
-const client = redis.createClient()
+// const client = redis.createClient()
 
 const BURN_LIMIT = 1
 const BEST_LIMIT = 3
@@ -172,21 +172,7 @@ module.exports.getContent = async ctx => {
     const images = topic.isImage > 0
         ? await readTopic.topicImages(id)
         : []
-    if (client.exists(id)) {
-        const hits = await new Promise(resolve => {
-            client.get(id, (err, value) => {
-                if (err) 
-                    return resolve(1)
-                const hit = Number(value) + 1
-                client.set(id, hit)
-                resolve(hit)
-            })
-        })
-        topic.hits += hits
-    } else {
-        client.set(id, 1)
-        topic.hits += 1
-    }
+    await updateTopic.updateTopicCountsByHits(id)
     let count = 0
     if (user) {
         await updateNotice.updateNoticeByConfirm(user.id, id)

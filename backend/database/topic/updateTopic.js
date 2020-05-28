@@ -20,6 +20,11 @@ module.exports.updateTopicByIsAllowed = async (topicId, isAllowed = 0) => await 
     [isAllowed, topicId]
 )
 
+module.exports.updateTopicCountsByHits = async (topicId, hits = 1) => await pool.query(
+    'UPDATE TopicCounts SET hits = hits + ? WHERE topicId = ?',
+    [hits, topicId]
+)
+
 module.exports.updateTopicCountsByLikes = async (topicId, likes = 1) => await pool.query(
     'UPDATE TopicCounts SET likes = likes + ? WHERE topicId = ?',
     [likes, topicId]
