@@ -7,6 +7,9 @@ const SendMail = require('../../lib/email')
 const createUser = require('../../database/user/createUser')
 const readUser = require('../../database/user/readUser')
 const updateUser = require('../../database/user/updateUser')
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 const hasher = bkfd2Password()
 

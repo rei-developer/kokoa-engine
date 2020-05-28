@@ -3,7 +3,6 @@ const Logger = require('koa-logger')
 const bodyParser = require('koa-bodyparser')
 const Router = require('koa-router')
 const helmet = require('koa-helmet')
-// const http = require('http')
 const api = require('./api')
 const consola = require('consola')
 const {Nuxt, Builder} = require('nuxt')
@@ -42,7 +41,7 @@ async function start() {
     } = nuxt.options.server
 
     await nuxt.ready()
-    // Build in development
+    
     if (config.dev) {
         const builder = new Builder(nuxt)
         await builder.build()
