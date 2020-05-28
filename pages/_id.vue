@@ -77,7 +77,7 @@
                         <span>탈락 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
                     </div>
                     <div>
-                        <span @click='copyLink(`https://www.idolboard.com/{{ id }}`)'>https://www.idolboard.com/{{ id }}</span>
+                        <span @click='copyLink(`https://www.idolboard.com/${ id }`)'>https://www.idolboard.com/{{ id }}</span>
                     </div>
                 </div>
             </div>
