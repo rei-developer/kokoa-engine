@@ -353,6 +353,8 @@
                 return Library.getBoardName(this.domain)
             },
             getData: async function(clear = true, forceUpdate = false) {
+                if (this.$nuxt.$route.name !== 'id' && this.$nuxt.$route.name !== 'board-domain')
+                    return
 				this.loading = true
                 this.$store.commit('setLoading', true)
                 if (forceUpdate)
@@ -387,7 +389,6 @@
                 this.getData(false)
             },
             getCount: async function() {
-                return
                 const data = await this.$axios.$get(`/api/topic/count/${this.domain}`)
                 if (data.status === 'fail')
 					return
@@ -433,13 +434,13 @@
             },
             realtimeUpdate() {
                 const update = setTimeout(async () => {
+                    if (this.$nuxt.$route.name !== 'id' && this.$nuxt.$route.name !== 'board-domain')
+                        return clearTimeout(update)
                     if (this.page === 1 && !this.searches.state) {
 					    this.getData()
                         this.getCount()
                     }
                 }, 30000)
-                if (this.$nuxt.$route.name !== 'id' && this.$nuxt.$route.name !== 'board-domain')
-                    clearTimeout(update)
             },
             numberWithCommas(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')

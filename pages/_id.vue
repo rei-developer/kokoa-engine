@@ -71,10 +71,10 @@
                 </div>
                 <div class='info'>
                     <div>
-                        <span class='desktop-only'>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
+                        <span>조회 <strong>{{ numberWithCommas(topic.hits) }}</strong></span>
                         <span class='desktop-only'>댓글 <strong>1</strong></span>
                         <span>데뷔 <strong>{{ numberWithCommas(topic.likes) }}</strong></span>
-                        <span>탈락 <strong>{{ numberWithCommas(topic.hates) }}</strong></span>
+                        <!-- <span>탈락 <strong>{{ numberWithCommas(topic.hates) }}</strong></span> -->
                     </div>
                     <div>
                         <span @click='copyLink(`https://www.idolboard.com/${ id }`)'>https://www.idolboard.com/{{ id }}</span>
@@ -90,10 +90,10 @@
                     <div/>
                     <div>데뷔<span>{{ numberWithCommas(topic.likes) }}</span></div>
                 </div>
-                <div class='hates' @click='votes(false)'>
+                <!-- <div class='hates' @click='votes(false)'>
                     <div/>
                     <div>탈락<span>{{ numberWithCommas(topic.hates) }}</span></div>
-                </div>
+                </div> -->
                 <div class='qrcode'>
                     <client-only>
                         <qriously

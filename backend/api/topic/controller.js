@@ -64,12 +64,12 @@ module.exports.getTopics = async ctx => {
     if (category !== '') 
         obj.category = category
     obj.isAllowed = 1
-    // const count = await readTopic.count(obj)
+    const count = await readTopic.count(obj)
     const categories = await readBoard.categories(domain)
     const notices = await readTopic.notices(domain)
     const topics = await readTopic.topics(obj, searches, page, limit)
     ctx.body = {
-        count: [],
+        count,
         categories,
         notices,
         topics

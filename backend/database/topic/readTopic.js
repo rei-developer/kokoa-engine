@@ -47,7 +47,10 @@ module.exports.userId = async id => {
 }
 
 module.exports.edit = async id => {
-    const result = await pool.query('SELECT userId, isPoll, isImage FROM Topics WHERE id = ?', [id])
+    const result = await pool.query(
+        'SELECT userId, isPoll, isImage FROM Topics WHERE id = ?',
+        [id]
+    )
     if (result.length < 1) 
         return false
     return result[0]
@@ -76,27 +79,27 @@ module.exports.counts = async domain => {
     let result
     if (domain === 'all') {
         result = await pool.query(
-            `SELECT
-                (SELECT COUNT(*) FROM Topics) count,
-				(SELECT COUNT(*) FROM Topics WHERE created > CURDATE()) today`
+            `SELECT COUNT(*) today FROM Topics WHERE created > CURDATE()`
         )
-        // (SELECT COUNT(*) FROM Topics WHERE created > CURDATE() - INTERVAL 1 DAY) yesterday
-        // (SELECT TIMESTAMPDIFF(MINUTE, CURRENT_DATE(), NOW()) / COUNT(*) FROM Topics WHERE created > CURDATE()) regen
+        // (SELECT COUNT(*) FROM Topics WHERE created > CURDATE() - INTERVAL 1 DAY)
+        // yesterday (SELECT TIMESTAMPDIFF(MINUTE, CURRENT_DATE(), NOW()) / COUNT(*)
+        // FROM Topics WHERE created > CURDATE()) regen
     } else if (domain === 'best') {
         result = await pool.query(
-            `SELECT
-				(SELECT COUNT(*) FROM Topics WHERE created > CURDATE() AND isBest > 1) today`
+            `SELECT COUNT(*) today FROM Topics WHERE created > CURDATE() AND isBest > 1`
         )
-        // (SELECT COUNT(*) FROM Topics WHERE created > CURDATE() - INTERVAL 1 DAY AND isBest > 1) yesterday,
-        // (SELECT TIMESTAMPDIFF(MINUTE, CURRENT_DATE(), NOW()) / COUNT(*) FROM Topics WHERE created > CURDATE() AND isBest > 1) regen
+        // (SELECT COUNT(*) FROM Topics WHERE created > CURDATE() - INTERVAL 1 DAY AND
+        // isBest > 1) yesterday, (SELECT TIMESTAMPDIFF(MINUTE, CURRENT_DATE(), NOW()) /
+        // COUNT(*) FROM Topics WHERE created > CURDATE() AND isBest > 1) regen
     } else {
         result = await pool.query(
-            `SELECT
-				(SELECT COUNT(*) FROM Topics WHERE created > CURDATE() AND boardDomain = ?) today`,
+            `SELECT COUNT(*) today FROM Topics WHERE created > CURDATE() AND boardDomain = ?`,
             [domain]
         )
-        // (SELECT COUNT(*) FROM Topics WHERE created > CURDATE() - INTERVAL 1 DAY AND boardDomain = ?) yesterday,
-        // (SELECT TIMESTAMPDIFF(MINUTE, CURRENT_DATE(), NOW()) / COUNT(*) FROM Topics WHERE created > CURDATE() AND boardDomain = ?) regen
+        // (SELECT COUNT(*) FROM Topics WHERE created > CURDATE() - INTERVAL 1 DAY AND
+        // boardDomain = ?) yesterday, (SELECT TIMESTAMPDIFF(MINUTE, CURRENT_DATE(),
+        // NOW()) / COUNT(*) FROM Topics WHERE created > CURDATE() AND boardDomain = ?)
+        // regen
     }
     if (result.length < 1) 
         return false
@@ -251,17 +254,22 @@ module.exports.topicsToWidget = async (columns, page, limit) => {
 
 module.exports.images = async (page, limit) => {
     const result = await pool.query(
-        'SELECT topicId, width, height, imageUrl FROM TopicImages ORDER BY id DESC LIMIT ?, ?',
-        [page * limit, limit]
+        'SELECT topicId, width, height, imageUrl FROM TopicImages ORDER BY id DESC LIMI' +
+                'T ?, ?',
+        [
+            page * limit,
+            limit
+        ]
     )
-    if (result.length < 1)
+    if (result.length < 1) 
         return false
     return result
 }
 
 module.exports.topicImages = async topicId => {
     const result = await pool.query(
-        'SELECT topicId, name, width, height, domain, imageUrl, uuid FROM TopicImages WHERE topicId = ?',
+        'SELECT topicId, name, width, height, domain, imageUrl, uuid FROM TopicImages W' +
+                'HERE topicId = ?',
         [topicId]
     )
     if (result.length < 1) 

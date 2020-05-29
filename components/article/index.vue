@@ -91,6 +91,8 @@
                 return Library.getBoardName(this.domain)
             },
             async getData(clear = true, forceUpdate = false) {
+                if (this.$nuxt.$route.name !== 'index')
+                    return
                 this.loading = true
                 if (forceUpdate) {
                     this.topics = []
@@ -120,12 +122,12 @@
             },
             realtimeUpdate() {
 				const update = setTimeout(async () => {
+                    if (this.$nuxt.$route.name !== 'index')
+                        return clearTimeout(update)
                     if (this.page === 0)
                         this.getData()
                     this.realtimeUpdate()
                 }, 30000)
-                if (this.$nuxt.$route.name !== 'index')
-                    clearTimeout(update)
             },
             imageUrlAlt(event) {
                 event.target.src = 'https://github.com/u3u.png'

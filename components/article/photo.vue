@@ -58,6 +58,8 @@
                 return list
             },
             async getData(forceUpdate = false) {
+                if (this.$nuxt.$route.name !== 'index')
+                    return
                 if (forceUpdate)
                     this.topics = []
                 const data = await this.$axios.$post(
@@ -71,11 +73,11 @@
             },
             realtimeUpdate() {
 				const update = setTimeout(async () => {
+                    if (this.$nuxt.$route.name !== 'index')
+                        return clearTimeout(update)
                     this.getData()
                     this.realtimeUpdate()
                 }, 60000)
-                if (this.$nuxt.$route.name !== 'index')
-                    clearTimeout(update)
             },
             imageUrlAlt(event) {
                 event.target.src = 'https://github.com/u3u.png'

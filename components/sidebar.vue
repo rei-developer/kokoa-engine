@@ -15,12 +15,12 @@
                 </ul>
             </div>
         </article>
-        <article class='counter'>
+        <!-- <article class='counter'>
             <span>
                 <font-awesome-icon icon='file-alt'/>
                 {{ counts.count }} (<span>+{{counts.today}}</span>)
             </span>
-        </article>
+        </article> -->
         <article class='side'>
             <ul>
                 <li>
@@ -51,7 +51,7 @@
             </nuxt-link>
         </article> -->
         <article class='shortcut'>
-            <nuxt-link to='/12'>
+            <nuxt-link to='/169399'>
                 <font-awesome-icon icon='check-square'/>
                 아이돌보드 단축키 안내
             </nuxt-link>
@@ -79,7 +79,7 @@
         },
         mounted() {
             this.getData()
-            this.getCount()
+            // this.getCount()
         },
         methods: {
             getData: async function(forceUpdate = false) {
