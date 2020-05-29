@@ -74,7 +74,7 @@ module.exports = {
     ['@nuxtjs/moment', ['ko']],
   ],
   'google-adsense': {
-    id: 'ca-pub-5633529273423665'
+    id: 'ca-pub-1970014826190934'
   },
   fontawesome: {
     imports: [
