@@ -39,9 +39,9 @@
                 <li>
                     <nuxt-link to='/board/girl'>연예</nuxt-link>
                 </li>
-                <li>
+                <!-- <li>
                     <nuxt-link to='/board/anime'>애니</nuxt-link>
-                </li>
+                </li> -->
             </ul>
         </article>
         <!-- <article class='service'>

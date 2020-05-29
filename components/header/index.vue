@@ -24,7 +24,7 @@
                 </li>
                 <li v-shortkey.once='["t"]' @shortkey='move("/board/talk")' @click='forceUpdate'><nuxt-link to='/board/talk'>토크</nuxt-link></li>
                 <li v-shortkey.once='["g"]' @shortkey='move("/board/girl")' @click='forceUpdate'><nuxt-link to='/board/girl'>연예</nuxt-link></li>
-                <li v-shortkey.once='["a"]' @shortkey='move("/board/anime")' @click='forceUpdate'><nuxt-link to='/board/anime'>애니</nuxt-link></li>
+                <!-- <li v-shortkey.once='["a"]' @shortkey='move("/board/anime")' @click='forceUpdate'><nuxt-link to='/board/anime'>애니</nuxt-link></li> -->
                 <li v-shortkey.once='["s"]' @shortkey='move("/sticker")' ><nuxt-link to='/sticker'>스티커</nuxt-link></li>
             </ul>
             <!-- login part -->
@@ -63,7 +63,7 @@
                 <li @click='forceUpdate'><nuxt-link to='/gallery'>갤러리</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/talk'>토크</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/girl'>연예</nuxt-link></li>
-                <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니</nuxt-link></li>
+                <!-- <li @click='forceUpdate'><nuxt-link to='/board/anime'>애니</nuxt-link></li> -->
                 <li @click='forceUpdate'><nuxt-link to='/board/notice'>공지사항</nuxt-link></li>
                 <li @click='forceUpdate'><nuxt-link to='/board/feedback'>건의사항</nuxt-link></li>
                 <li><nuxt-link to='/sticker'>스티커</nuxt-link></li>
