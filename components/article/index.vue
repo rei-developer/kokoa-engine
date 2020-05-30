@@ -173,7 +173,7 @@
                     > li {
                         > a {
                             display: inline-block;
-                            width: 388px;
+                            width: 380px;
                             height: 26px;
                             line-height: 26px;
                             padding: 1px 5px;
@@ -189,7 +189,7 @@
                         }
                         > span {
                             display: inline-block;
-                            min-width: 10px;
+                            width: 64px;
                             line-height: 1;
                             padding: 3px 6px;
                             color: #fff;

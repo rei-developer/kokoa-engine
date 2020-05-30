@@ -281,7 +281,7 @@
             },
             async downloadWithAxios(url, name) {
                 await fetch(
-                    `https://www.idolboard.com/img/${url}`,
+                    `${location.origin}/img/${url}`,
                     {
                         headers: { 'Accept': 'image/*', },
                         responseType: 'arraybuffer'
