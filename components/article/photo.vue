@@ -1,7 +1,7 @@
 <template>
     <article class='widget'>
         <h6>
-            <span>{{ getBoardName(domain) }}</span>
+            <span>{{ getBoardName(domain) }} 갤러리</span>
             <nuxt-link :to='`/board/${domain}`'>더보기</nuxt-link>
         </h6>
         <div>
@@ -9,7 +9,7 @@
                 <li v-for='(item, index) in getTopics(0)' :key='index'>
                     <nuxt-link :to='`${item.id}`'>
                         <img :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
-                        <strong>OP</strong>
+                        <!-- <strong>OP</strong> -->
                         <div>{{ item.title }}</div>
                     </nuxt-link>
                 </li>
@@ -18,7 +18,7 @@
                 <li v-for='(item, index) in getTopics(3)' :key='index'>
                     <nuxt-link :to='`${item.id}`'>
                         <img :src='`/img/thumb/${item.imageUrl}`' @error='imageUrlAlt'>
-                        <strong>OP</strong>
+                        <!-- <strong>OP</strong> -->
                         <div>{{ item.title }}</div>
                     </nuxt-link>
                 </li>

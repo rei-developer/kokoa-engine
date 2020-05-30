@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
-const {CRYPTO_SECRET} = process.env
+const { CRYPTO_SECRET } = process.env
 
 module.exports.encrypt = text => {
     const cipher = crypto.createCipher('aes-256-cbc', CRYPTO_SECRET)

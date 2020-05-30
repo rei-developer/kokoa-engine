@@ -5,7 +5,7 @@ const deleteNotice = require('../../database/notice/deleteNotice')
 
 module.exports.getCount = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     const count = await readNotice.count(user.id)
     ctx.body = {
@@ -20,10 +20,10 @@ module.exports.getNotices = async ctx => {
     } = ctx.request.body
     const page = body.page || 0
     const limit = body.limit || 5
-    if (page < 0 || limit < 5 || limit > 50) 
+    if (page < 0 || limit < 5 || limit > 50)
         return
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     const notices = await readNotice.notices(user.id, page, limit)
     ctx.body = {
@@ -33,11 +33,11 @@ module.exports.getNotices = async ctx => {
 }
 
 module.exports.deleteNotice = async ctx => {
-    const {id} = ctx.params
-    if (id < 1) 
+    const { id } = ctx.params
+    if (id < 1)
         return
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     await deleteNotice.id(id, user.id)
     ctx.body = {
@@ -47,7 +47,7 @@ module.exports.deleteNotice = async ctx => {
 
 module.exports.deleteNotices = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     await deleteNotice(user.id)
     ctx.body = {
@@ -56,11 +56,11 @@ module.exports.deleteNotices = async ctx => {
 }
 
 module.exports.updateNoticeByConfirm = async ctx => {
-    const {id, flag} = ctx.params
-    if (id < 1 || flag < 0 || flag > 1) 
+    const { id, flag } = ctx.params
+    if (id < 1 || flag < 0 || flag > 1)
         return
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     await updateNotice.id(id, user.id, flag)
     ctx.body = {
@@ -70,7 +70,7 @@ module.exports.updateNoticeByConfirm = async ctx => {
 
 module.exports.updateNoticesByConfirm = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     await updateNotice(user.id)
     ctx.body = {

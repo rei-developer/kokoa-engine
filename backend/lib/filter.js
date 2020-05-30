@@ -83,8 +83,8 @@ module.exports.post = text => {
         `<p><pre><q><br><a><b><h1><h2><h3><h4><h5><h6><hr><span><strong><em><u><s><sub><sup><address><ol><ul><li><blockquote><img><iframe><embed><object><param><table><tbody><tr><td><code><audio><source>`
     )
     text = text.replace(
-		/((http(s)?:\/\/)?(www.)?twitter(\.[^(\n|\t|\s,)]+)+)+$/gi,
-		`<p><a href="$&" target='_blank'>$&</a></p><p><blockquote
+        /((http(s)?:\/\/)?(www.)?twitter(\.[^(\n|\t|\s,)]+)+)+$/gi,
+        `<p><a href="$&" target='_blank'>$&</a></p><p><blockquote
 		class='twitter-tweet' data-lang='ko'><a href="$&"></a></blockquote><script
 		async src='https://platform.twitter.com/widgets.js'
 		charset='utf-8'></script></p>`)

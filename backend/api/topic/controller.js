@@ -28,9 +28,9 @@ const BEST_LIMIT = 3
 const DELETE_LIMIT = 10
 
 module.exports.getTopicCounts = async ctx => {
-    const {domain} = ctx.params
+    const { domain } = ctx.params
     const counts = await readTopic.counts(domain)
-    if (!counts) 
+    if (!counts)
         return ctx.body = {
             status: 'fail'
         }
@@ -50,18 +50,18 @@ module.exports.getTopics = async ctx => {
     }
     const page = body.page || 0
     const limit = body.limit || 20
-    if (page < 0) 
+    if (page < 0)
         return
-    if (limit < 5 || limit > 50) 
+    if (limit < 5 || limit > 50)
         return
     const obj = {}
-    if (domain === 'best') 
+    if (domain === 'best')
         obj.isBest = 2
-    else if (domain !== 'all') 
+    else if (domain !== 'all')
         obj.boardDomain = domain
-    if (userId > 0) 
+    if (userId > 0)
         obj.userId = userId
-    if (category !== '') 
+    if (category !== '')
         obj.category = category
     obj.isAllowed = 1
     const count = await readTopic.count(obj)
@@ -104,9 +104,9 @@ module.exports.getPosts = async ctx => {
     const topicId = body.id || 0
     const page = body.page || 0
     const limit = body.limit || 20
-    if (topicId < 0 || page < 0) 
+    if (topicId < 0 || page < 0)
         return
-    if (limit < 10 || limit > 50) 
+    if (limit < 10 || limit > 50)
         return
     const count = await readPost.count(topicId)
     const posts = await readPost.posts(topicId, page, limit)
@@ -123,9 +123,9 @@ module.exports.getMyPosts = async ctx => {
     const userId = body.userId || 0
     const page = body.page || 0
     const limit = body.limit || 20
-    if (userId < 0 || page < 0) 
+    if (userId < 0 || page < 0)
         return
-    if (limit < 10 || limit > 50) 
+    if (limit < 10 || limit > 50)
         return
     const count = await readPost.countByMe(userId)
     const posts = await readPost.postsByMe(userId, page, limit)
@@ -153,13 +153,13 @@ module.exports.getImages = async ctx => {
 }
 
 module.exports.getCategories = async ctx => {
-    const {domain} = ctx.params
+    const { domain } = ctx.params
     const categories = await readBoard.categories(domain)
     ctx.body = categories
 }
 
 module.exports.getContent = async ctx => {
-    const {id} = ctx.params
+    const { id } = ctx.params
     const user = await User.getUser(ctx.get('x-access-token'))
     let topic = await readTopic(id)
     if (!topic || topic.isAllowed < 1 || (topic.boardDomain === 'feedback' && (!user || (user.isAdmin < 1 && topic.userId !== user.id))))
@@ -204,7 +204,7 @@ module.exports.getSavedContent = async ctx => {
 
 module.exports.createTopic = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return ctx.body = {
             status: 'fail'
         }
@@ -218,16 +218,16 @@ module.exports.createTopic = async ctx => {
         poll,
         images
     } = ctx.request.body
-    if (title === '' || content === '<p></p>') 
+    if (title === '' || content === '<p></p>')
         return
     title = Filter.disable(title)
     content = Filter.topic(content)
     if (color !== '')
         color = color.replace('#', '')
     const isAdminOnly = await readBoard.isAdminOnly(domain)
-    if (isAdminOnly < 0) 
+    if (isAdminOnly < 0)
         return
-    if (user.isAdmin < isAdminOnly) 
+    if (user.isAdmin < isAdminOnly)
         return ctx.body = {
             message: '권한이 없습니다.',
             status: 'fail'
@@ -236,7 +236,7 @@ module.exports.createTopic = async ctx => {
         // TODO: 관리자 전용 커스텀
         if (color !== '')
             color = ''
-        if (isNotice > 0) 
+        if (isNotice > 0)
             isNotice = 0
     }
     const ip = ctx.get('x-real-ip')
@@ -279,7 +279,7 @@ module.exports.createTopic = async ctx => {
 
 module.exports.createTopicSave = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return ctx.body = {
             status: 'fail'
         }
@@ -289,7 +289,7 @@ module.exports.createTopicSave = async ctx => {
         title,
         content
     } = ctx.request.body
-    if (title === '' && content === '<p></p>') 
+    if (title === '' && content === '<p></p>')
         return
     title = Filter.disable(title)
     content = Filter.topic(content)
@@ -320,7 +320,7 @@ module.exports.createTopicSave = async ctx => {
 
 module.exports.createPost = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return ctx.body = {
             status: 'fail'
         }
@@ -334,7 +334,7 @@ module.exports.createPost = async ctx => {
         sticker
     } = ctx.request.body
     topicUserId = Number(topicUserId)
-    if (postUserId) 
+    if (postUserId)
         postUserId = Number(postUserId)
     content = Filter.post(content)
     const ip = ctx.get('x-real-ip')
@@ -356,9 +356,9 @@ module.exports.createPost = async ctx => {
     await createPost.createPostCounts(postId)
     await User.setUpPoint(user, 5)
     const items = []
-    if (user.id !== topicUserId) 
+    if (user.id !== topicUserId)
         items.push(topicUserId)
-    if (postUserId && user.id !== postUserId && topicUserId !== postUserId && postUserId > 0) 
+    if (postUserId && user.id !== postUserId && topicUserId !== postUserId && postUserId > 0)
         items.push(postUserId)
     const jobs = items.map(receiver => new Promise(async resolve => {
         await createNotice(receiver, topicId, postId)
@@ -376,28 +376,28 @@ module.exports.createPost = async ctx => {
 
 module.exports.createTopicVotes = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return ctx.body = {
             status: 'fail'
         }
-    let {id, likes} = ctx.request.body
-    if (id < 1) 
+    let { id, likes } = ctx.request.body
+    if (id < 1)
         return
     const topic = await readTopic(id)
-    if (!topic) 
+    if (!topic)
         return ctx.body = {
             status: 'fail'
         }
     const targetUser = await readUser(topic.userId)
     const ip = ctx.get('x-real-ip')
-    if (targetUser === user.id || topic.ip === ip) 
+    if (targetUser === user.id || topic.ip === ip)
         return ctx.body = {
             message: '본인에게 투표할 수 없습니다.',
             status: 'fail'
         }
     const duration = moment.duration(moment().diff(topic.created))
     const hours = duration.asHours()
-    if (hours > 72) 
+    if (hours > 72)
         return ctx.body = {
             message: '3일이 지난 게시물은 투표할 수 없습니다.',
             status: 'fail'
@@ -462,26 +462,26 @@ module.exports.createTopicVotes = async ctx => {
 
 module.exports.createPostVotes = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
-    let {id, likes} = ctx.request.body
-    if (id < 1) 
+    let { id, likes } = ctx.request.body
+    if (id < 1)
         return
     const post = await readPost(id)
-    if (!post) 
+    if (!post)
         return ctx.body = {
             status: 'fail'
         }
     const targetUser = await readUser(post.userId)
     const ip = ctx.get('x-real-ip')
-    if (targetUser === user.id || post.ip === ip) 
+    if (targetUser === user.id || post.ip === ip)
         return ctx.body = {
             message: '본인에게 투표할 수 없습니다.',
             status: 'fail'
         }
     const duration = moment.duration(moment().diff(post.created))
     const hours = duration.asHours()
-    if (hours > 72) 
+    if (hours > 72)
         return ctx.body = {
             message: '3일이 지난 게시물은 투표할 수 없습니다.',
             status: 'fail'
@@ -495,9 +495,9 @@ module.exports.createPostVotes = async ctx => {
         }
     }
     await createPost.createPostVotes(user.id, id, ip)
-    if (likes) 
+    if (likes)
         await updatePost.updatePostCountsByLikes(id)
-    else 
+    else
         await updatePost.updatePostCountsByHates(id)
     await socket.votePost(
         global.io,
@@ -516,20 +516,20 @@ module.exports.createPostVotes = async ctx => {
 }
 
 module.exports.updateTopic = async ctx => {
-    const {id} = ctx.params
+    const { id } = ctx.params
     if (id < 1)
         return ctx.body = {
             status: 'fail'
         }
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     const topic = await readTopic.edit(id)
-    if (!topic.userId) 
+    if (!topic.userId)
         return ctx.body = {
             status: 'fail'
         }
-    if (user.isAdmin < 1 && topic.userId !== user.id) 
+    if (user.isAdmin < 1 && topic.userId !== user.id)
         return
     let {
         domain,
@@ -541,7 +541,7 @@ module.exports.updateTopic = async ctx => {
         poll,
         images
     } = ctx.request.body
-    if (title === '' || content === '<p></p>') 
+    if (title === '' || content === '<p></p>')
         return
     title = Filter.disable(title)
     content = Filter.topic(content)
@@ -551,7 +551,7 @@ module.exports.updateTopic = async ctx => {
         // TODO: 관리자 전용 커스텀
         if (color !== '')
             color = ''
-        if (isNotice > 0) 
+        if (isNotice > 0)
             isNotice = 0
     }
     const isPoll = !poll.hide
@@ -592,7 +592,7 @@ module.exports.updateTopic = async ctx => {
     if (trashImages) {
         const jobs = trashImages.map(image => new Promise(async resolve => {
             fs.unlink(`./img/${image}`, err => {
-                if (err) 
+                if (err)
                     console.log(err)
                 resolve(true)
             })
@@ -600,7 +600,7 @@ module.exports.updateTopic = async ctx => {
         await Promise.all(jobs)
         const jobsForThumb = trashImages.map(image => new Promise(async resolve => {
             fs.unlink(`./img/thumb/${image}`, err => {
-                if (err) 
+                if (err)
                     console.log(err)
                 resolve(true)
             })
@@ -622,19 +622,19 @@ module.exports.updateTopic = async ctx => {
 
 module.exports.updateTopicByIsNotice = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
-    const {id} = ctx.request.body
-    if (id < 1) 
+    const { id } = ctx.request.body
+    if (id < 1)
         return ctx.body = {
             status: 'fail'
         }
     const topic = await readTopic(id)
-    if (!topic) 
+    if (!topic)
         return ctx.body = {
             status: 'fail'
         }
-    if (user.isAdmin < 1) 
+    if (user.isAdmin < 1)
         return
     await updateTopic.updateTopicByIsNotice(id)
     ctx.body = {
@@ -644,19 +644,19 @@ module.exports.updateTopicByIsNotice = async ctx => {
 
 module.exports.updatePost = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
-    const {id, content, sticker} = ctx.request.body
-    if (id < 1) 
+    const { id, content, sticker } = ctx.request.body
+    if (id < 1)
         return ctx.body = {
             status: 'fail'
         }
     const userId = await readPost.userId(id)
-    if (!userId) 
+    if (!userId)
         return ctx.body = {
             status: 'fail'
         }
-    if (user.isAdmin < 1 && userId !== user.id) 
+    if (user.isAdmin < 1 && userId !== user.id)
         return
     await updatePost(id, Filter.post(content), sticker.id, sticker.select)
     ctx.body = {
@@ -666,19 +666,19 @@ module.exports.updatePost = async ctx => {
 
 module.exports.deleteTopic = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
-    const {id} = ctx.request.body
-    if (id < 1) 
+    const { id } = ctx.request.body
+    if (id < 1)
         return ctx.body = {
             status: 'fail'
         }
     const topic = await readTopic.edit(id)
-    if (!topic.userId) 
+    if (!topic.userId)
         return ctx.body = {
             status: 'fail'
         }
-    if (user.isAdmin < 1 && topic.userId !== user.id) 
+    if (user.isAdmin < 1 && topic.userId !== user.id)
         return
     if (topic.isPoll) {
         await deletePoll(id)
@@ -688,7 +688,7 @@ module.exports.deleteTopic = async ctx => {
     if (images) {
         const jobs = images.map(image => new Promise(async resolve => {
             fs.unlink(`./img/${image.imageUrl}`, err => {
-                if (err) 
+                if (err)
                     console.log(err)
                 resolve(true)
             })
@@ -696,7 +696,7 @@ module.exports.deleteTopic = async ctx => {
         await Promise.all(jobs)
         const jobsForThumb = images.map(image => new Promise(async resolve => {
             fs.unlink(`./img/thumb/${image.imageUrl}`, err => {
-                if (err) 
+                if (err)
                     console.log(err)
                 resolve(true)
             })
@@ -706,9 +706,9 @@ module.exports.deleteTopic = async ctx => {
     }
     await deleteNotice.topicId(id)
     await deletePost.topicId(id)
-    if (user.isAdmin > 0) 
+    if (user.isAdmin > 0)
         await deleteTopic(id)
-    else 
+    else
         await updateTopic.updateTopicByIsAllowed(id)
     await User.setUpPoint(user, -20)
     ctx.body = {
@@ -718,19 +718,19 @@ module.exports.deleteTopic = async ctx => {
 
 module.exports.deletePost = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
-    const {id} = ctx.request.body
-    if (id < 1) 
+    const { id } = ctx.request.body
+    if (id < 1)
         return ctx.body = {
             status: 'fail'
         }
     const userId = await readPost.userId(id)
-    if (!userId) 
+    if (!userId)
         return ctx.body = {
             status: 'fail'
         }
-    if (user.isAdmin < 1 && userId !== user.id) 
+    if (user.isAdmin < 1 && userId !== user.id)
         return
     await deleteNotice.postId(id)
     await deletePost(id)

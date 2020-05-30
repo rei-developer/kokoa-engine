@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
-const {EMAIL_USER, EMAIL_PASSWORD} = process.env
+const { EMAIL_USER, EMAIL_PASSWORD } = process.env
 const transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     auth: {

@@ -24,15 +24,15 @@ const getUpperByExp = (user, exp) => {
 
 module.exports.getUser = async (token) => {
     const TOKEN = token || ''
-    if (TOKEN.split('.').length < 3) 
+    if (TOKEN.split('.').length < 3)
         return false
     try {
         const result = await new Promise((resolve, reject) => {
             jwt.verify(TOKEN, process.env.JWT_SECRET, async (err, payload) => {
-                if (err) 
+                if (err)
                     return reject(false)
                 const user = await readUser(payload.jti)
-                if (!user) 
+                if (!user)
                     return reject(false)
                 resolve(user)
             })
@@ -45,7 +45,7 @@ module.exports.getUser = async (token) => {
 
 module.exports.isAuthenticated = async (ctx, next) => {
     const TOKEN = ctx.get('x-access-token') || ''
-    if (TOKEN.split('.').length < 3) 
+    if (TOKEN.split('.').length < 3)
         return
     await jwt.verify(TOKEN, process.env.JWT_SECRET, async (err, payload) => {
         if (err) {
@@ -60,7 +60,7 @@ module.exports.isAuthenticated = async (ctx, next) => {
             }
         }
         const user = await readUser(payload.jti)
-        if (!user) 
+        if (!user)
             return ctx.body = {
                 message: '존재하지 않는 계정입니다.',
                 status: 'fail'

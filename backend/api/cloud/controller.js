@@ -1,6 +1,6 @@
 const fs = require('fs')
 const sharp = require('sharp')
-const {execFile} = require('child_process')
+const { execFile } = require('child_process')
 const giflossy = require('giflossy')
 
 module.exports.createImage = type => async ctx => {
@@ -11,7 +11,7 @@ module.exports.createImage = type => async ctx => {
     try {
         if (checker) {
             fs.readFile(`./img/${filename}`, (err, data) => {
-                if (err) 
+                if (err)
                     return ctx.body = {
                         message: err,
                         status: 'fail'
@@ -20,16 +20,16 @@ module.exports.createImage = type => async ctx => {
                     execFile(giflossy, [
                         '-O3', '--lossy=80', '-o', `./img/${filename}`, `./img/${filename}`
                     ], err => {
-                        if (err) 
+                        if (err)
                             return ctx.body = {
                                 message: err,
                                 status: 'fail'
                             }
-                        if (type === 'icon') 
+                        if (type === 'icon')
                             fs.writeFile(
                                 `./icon/${filename}`,
                                 data,
-                                () => fs.unlink(`./img/${filename}`, () => {})
+                                () => fs.unlink(`./img/${filename}`, () => { })
                             )
                     })
                 } else {
@@ -40,7 +40,7 @@ module.exports.createImage = type => async ctx => {
                             .then(
                                 metadata => image.resize(Math.min(metadata.width, 960)).withMetadata().rotate().jpeg(80).toBuffer()
                             )
-                            .then(result => fs.writeFile(`./img/${filename}`, result, () => {}))
+                            .then(result => fs.writeFile(`./img/${filename}`, result, () => { }))
                     } else if (type === 'background') {
                         image
                             .metadata()
@@ -48,14 +48,14 @@ module.exports.createImage = type => async ctx => {
                                 metadata => image.resize(Math.min(metadata.width, 960)).jpeg(80).toBuffer()
                             )
                             .then(
-                                result => fs.writeFile(`./background/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => {}))
+                                result => fs.writeFile(`./background/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
                             )
                     } else if (type === 'icon') {
                         image
                             .metadata()
                             .then(() => image.resize(23, 23).toBuffer())
                             .then(
-                                result => fs.writeFile(`./icon/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => {}))
+                                result => fs.writeFile(`./icon/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
                             )
                     } else if (type === 'pick') {
                         image
@@ -64,14 +64,14 @@ module.exports.createImage = type => async ctx => {
                                 metadata => image.resize(Math.min(metadata.width, 960)).jpeg(80).toBuffer()
                             )
                             .then(
-                                result => fs.writeFile(`./pick/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => {}))
+                                result => fs.writeFile(`./pick/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
                             )
                     } else {
                         image
                             .metadata()
                             .then(() => image.resize(100, 100).toBuffer())
                             .then(
-                                result => fs.writeFile(`./profile/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => {}))
+                                result => fs.writeFile(`./profile/${filename}`, result, () => fs.unlink(`./img/${filename}`, () => { }))
                             )
                     }
                 }
@@ -80,13 +80,13 @@ module.exports.createImage = type => async ctx => {
                     thumbnail
                         .metadata()
                         .then(() => thumbnail.resize(100, 100).toBuffer())
-                        .then(result => fs.writeFile(`./img/thumb/${filename}`, result, () => {}))
+                        .then(result => fs.writeFile(`./img/thumb/${filename}`, result, () => { }))
                 } else if (type === 'pick') {
                     const thumbnail = sharp(data)
                     thumbnail
                         .metadata()
                         .then(() => thumbnail.resize(80, 80).toBuffer())
-                        .then(result => fs.writeFile(`./pick/thumb/${filename}`, result, () => {}))
+                        .then(result => fs.writeFile(`./pick/thumb/${filename}`, result, () => { }))
                 }
             })
             ctx.body = {
@@ -94,7 +94,7 @@ module.exports.createImage = type => async ctx => {
                 status: 'ok'
             }
         } else {
-            fs.unlink(`./img/${filename}`, () => {})
+            fs.unlink(`./img/${filename}`, () => { })
             ctx.body = {
                 message: 'gif, png, jpg, jpeg, webp만 가능',
                 status: 'fail'

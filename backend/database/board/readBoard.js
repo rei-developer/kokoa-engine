@@ -5,7 +5,7 @@ module.exports.isAdminOnly = async domain => {
         'SELECT isAdminOnly FROM Boards WHERE domain = ?',
         [domain]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return -1
     return result[0].isAdminOnly
 }
@@ -15,7 +15,7 @@ module.exports.categories = async boardDomain => {
         'SELECT text, value FROM Categories WHERE boardDomain = ?',
         [boardDomain]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result
 }

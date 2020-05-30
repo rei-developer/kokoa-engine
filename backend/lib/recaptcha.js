@@ -4,7 +4,7 @@ const qs = require('qs')
 
 dotenv.config()
 
-const {RECAPTCHA_KEY} = process.env
+const { RECAPTCHA_KEY } = process.env
 
 const auth = async (token, ip) => {
     const Token = token
@@ -25,9 +25,9 @@ const auth = async (token, ip) => {
 module.exports.authRecaptcha = async (token, ip) => {
     try {
         const res = await auth(token, ip)
-        if (!res.success || res.score < 0.9) 
+        if (!res.success || res.score < 0.9)
             return false
-        else 
+        else
             return true
     } catch (e) {
         throw e

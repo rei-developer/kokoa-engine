@@ -34,14 +34,14 @@ module.exports = async id => {
 		WHERE t.id = ?`,
         [id]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
 
 module.exports.userId = async id => {
     const result = await pool.query('SELECT userId FROM Topics WHERE id = ?', [id])
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0].userId
 }
@@ -51,7 +51,7 @@ module.exports.edit = async id => {
         'SELECT userId, isPoll, isImage FROM Topics WHERE id = ?',
         [id]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
@@ -101,7 +101,7 @@ module.exports.counts = async domain => {
         // NOW()) / COUNT(*) FROM Topics WHERE created > CURDATE() AND boardDomain = ?)
         // regen
     }
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
@@ -130,7 +130,7 @@ module.exports.notices = async domain => {
 		ORDER BY t.id DESC`,
         [domain]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result
 }
@@ -205,7 +205,7 @@ module.exports.topics = async (columns, searches, page, limit) => {
                     limit
                 ]
         )
-        if (result.length < 1) 
+        if (result.length < 1)
             return false
         return result
     } catch (e) {
@@ -243,7 +243,7 @@ module.exports.topicsToWidget = async (columns, page, limit) => {
                 limit
             ]
         )
-        if (result.length < 1) 
+        if (result.length < 1)
             return false
         return result
     } catch (e) {
@@ -255,13 +255,13 @@ module.exports.topicsToWidget = async (columns, page, limit) => {
 module.exports.images = async (page, limit) => {
     const result = await pool.query(
         'SELECT topicId, width, height, imageUrl FROM TopicImages ORDER BY id DESC LIMI' +
-                'T ?, ?',
+        'T ?, ?',
         [
             page * limit,
             limit
         ]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result
 }
@@ -269,10 +269,10 @@ module.exports.images = async (page, limit) => {
 module.exports.topicImages = async topicId => {
     const result = await pool.query(
         'SELECT topicId, name, width, height, domain, imageUrl, uuid FROM TopicImages W' +
-                'HERE topicId = ?',
+        'HERE topicId = ?',
         [topicId]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result
 }
@@ -282,7 +282,7 @@ module.exports.topicSaves = async userId => {
         'SELECT * FROM TopicSaves WHERE userId = ?',
         [userId]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
@@ -292,7 +292,7 @@ module.exports.topicVotes = async (userId, topicId, ip) => {
         'SELECT created FROM TopicVotes WHERE topicId = ? AND (userId = ? OR ip = ?)',
         [topicId, userId, ip]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0].created
 }

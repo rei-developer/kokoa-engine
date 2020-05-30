@@ -12,7 +12,7 @@ module.exports = async id => {
 		WHERE id = ?`,
         [id]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
@@ -22,7 +22,7 @@ module.exports.userId = async id => {
         'SELECT userId FROM PickPosts WHERE id = ?',
         [id]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0].userId
 }
@@ -65,7 +65,7 @@ module.exports.posts = async (pickId, page, limit) => {
             limit
         ]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result
 }

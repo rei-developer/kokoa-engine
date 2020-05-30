@@ -17,14 +17,14 @@ module.exports = async id => {
 		ORDER BY likes DESC`,
         [id]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
 
 module.exports.userId = async id => {
     const result = await pool.query('SELECT userId FROM Picks WHERE id = ?', [id])
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0].userId
 }
@@ -98,7 +98,7 @@ module.exports.picks = async (columns, searches, page, limit) => {
                     limit
                 ]
         )
-        if (result.length < 1) 
+        if (result.length < 1)
             return false
         return result
     } catch (e) {
@@ -112,7 +112,7 @@ module.exports.pickVotes = async ip => {
         'SELECT created FROM PickVotes WHERE created >= DATE_FORMAT(CURDATE(), "%Y-%m-%d") AND ip = ?',
         [ip]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0].created
 }

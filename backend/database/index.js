@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
-const {DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE} = process.env
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE } = process.env
 
 const pool = mysql.createPool({
     connectionLimit: 5000,
@@ -29,7 +29,7 @@ pool.getConnection((err, connection) => {
                 break
         }
     }
-    if (connection) 
+    if (connection)
         return connection.release()
 })
 

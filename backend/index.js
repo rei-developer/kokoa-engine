@@ -5,7 +5,7 @@ const Router = require('koa-router')
 const helmet = require('koa-helmet')
 const api = require('./api')
 const consola = require('consola')
-const {Nuxt, Builder} = require('nuxt')
+const { Nuxt, Builder } = require('nuxt')
 
 const app = new Koa()
 const router = new Router()
@@ -14,10 +14,10 @@ const config = require('../nuxt.config.js')
 config.dev = app.env !== 'production'
 
 router
-	.use(helmet())
-	.use(Logger())
-	.use(bodyParser())
-	.use('/api', api.routes())
+    .use(helmet())
+    .use(Logger())
+    .use(bodyParser())
+    .use('/api', api.routes())
 
 app
     .use(router.routes())
@@ -41,7 +41,7 @@ async function start() {
     } = nuxt.options.server
 
     await nuxt.ready()
-    
+
     if (config.dev) {
         const builder = new Builder(nuxt)
         await builder.build()
@@ -56,7 +56,7 @@ async function start() {
 
     server.listen(port, host)
     consola.ready(
-        {message: `Server listening on http://${host}:${port}`, badge: true}
+        { message: `Server listening on http://${host}:${port}`, badge: true }
     )
 }
 

@@ -2,7 +2,7 @@ const pool = require('..')
 
 module.exports = async id => {
     const result = await pool.query('SELECT * FROM Icons WHERE id = ?', [id])
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
@@ -20,7 +20,7 @@ module.exports.icons = async (page, limit) => {
             limit
         ]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result
 }

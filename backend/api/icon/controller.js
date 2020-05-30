@@ -20,30 +20,30 @@ module.exports.getIcons = async ctx => {
 
 module.exports.createIcon = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
-    let {name, description, price, filename} = ctx.request.body
-    if (name === '' || description === '') 
+    let { name, description, price, filename } = ctx.request.body
+    if (name === '' || description === '')
         return
     name = Filter.disable(name)
     description = Filter.disable(description)
-    await createIcon({name, description, price, filename})
+    await createIcon({ name, description, price, filename })
     ctx.body = {
         status: 'ok'
     }
 }
 
 module.exports.buy = async ctx => {
-    const {id} = ctx.request.body
-    if (id < 1) 
+    const { id } = ctx.request.body
+    if (id < 1)
         return
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     const icon = await readIcon(id)
-    if (!icon) 
+    if (!icon)
         return
-    if (user.point < icon.price) 
+    if (user.point < icon.price)
         return ctx.body = {
             message: '포인트가 부족합니다.',
             status: 'fail'
@@ -57,7 +57,7 @@ module.exports.buy = async ctx => {
 
 module.exports.remove = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
     await User.setIcon(user, '')
     ctx.body = {

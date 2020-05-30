@@ -3,8 +3,8 @@ const createPoll = require('../../database/poll/createPoll')
 const readPoll = require('../../database/poll/readPoll')
 
 module.exports.getVotes = async ctx => {
-    const {id} = ctx.params
-    if (id < 1) 
+    const { id } = ctx.params
+    if (id < 1)
         return
     const user = await User.getUser(ctx.get('x-access-token'))
     const ip = ctx.get('x-real-ip')
@@ -23,10 +23,10 @@ module.exports.getVotes = async ctx => {
 
 module.exports.votes = async ctx => {
     const user = await User.getUser(ctx.get('x-access-token'))
-    if (!user) 
+    if (!user)
         return
-    let {id, select} = ctx.request.body
-    if (id < 1) 
+    let { id, select } = ctx.request.body
+    if (id < 1)
         return
     const ip = ctx.get('x-real-ip')
     const { created } = await readPoll.voted(user.id, id, ip)

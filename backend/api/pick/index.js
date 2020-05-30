@@ -9,7 +9,6 @@ app.post('/list/post', Controller.getPickPosts)
 app.post('/write', Controller.createPick)
 app.post('/write/post', Controller.createPickPost)
 app.post('/vote', Controller.createPickVotes)
-app.post('/recaptcha', Controller.showRecaptcha)
 app.patch('/edit/post', Controller.updatePickPost)
 app.delete('/delete/post', Controller.deletePickPost)
 

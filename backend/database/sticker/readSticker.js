@@ -3,7 +3,7 @@ const _ = require('lodash')
 
 module.exports = async id => {
     const result = await pool.query('SELECT * FROM Stickers WHERE id = ?', [id])
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
@@ -43,7 +43,7 @@ module.exports.stickers = async (columns, page, limit) => {
                 limit
             ]
         )
-        if (result.length < 1) 
+        if (result.length < 1)
             return false
         return result
     } catch (e) {
@@ -57,7 +57,7 @@ module.exports.check = async (userId, stickerId) => {
         'SELECT id, regdate FROM StickerInventory WHERE userId = ? AND stickerId = ?',
         [userId, stickerId]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result[0]
 }
@@ -74,7 +74,7 @@ module.exports.inventory = async userId => {
 		WHERE si.userId = ? AND TIME_TO_SEC(TIMEDIFF(si.regdate, NOW())) > 0`,
         [userId]
     )
-    if (result.length < 1) 
+    if (result.length < 1)
         return false
     return result
 }
