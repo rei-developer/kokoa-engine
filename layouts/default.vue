@@ -58,7 +58,7 @@
             return {
                 ver: {
                     backend: 0,
-                    frontend: 8
+                    frontend: 9
                 }
             }
         },
@@ -96,7 +96,7 @@
                 this.ver.backend = data.version || 0
             },
             checkLogged: async function() {
-                const token = localStorage.token
+                const token = localStorage.tk
                 if (!token)
                     return
                 const data = await this.$axios.$get(
@@ -109,7 +109,7 @@
                 this.$store.commit('user/setUser', data)
             },
             getNotices: async function() {
-                const token = localStorage.token
+                const token = localStorage.tk
                 if (!token)
                     return
                 const data = await this.$axios.$get(
