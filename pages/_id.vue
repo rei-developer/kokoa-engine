@@ -43,13 +43,9 @@
         </b-form-group>
         <article class='topic-view'>
             <h6>
-                <div class='regdate'>
-                    <span>{{ $moment(topic.created).fromNow() }}</span>
-                </div>
-                <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>
-                    <div class='category' v-if='topic.category'>{{ topic.category }}</div>
-                    {{ topic.title }}
-                </div>
+                <div class='category' v-if='topic.category'>{{ topic.category }}</div>
+                <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>{{ topic.title }}</div>
+                <div class='regdate'>{{ $moment(topic.created).fromNow() }}</div>
             </h6>
             <div class='profile'>
                 <div class='image' v-if='topic.profile'>
@@ -222,7 +218,9 @@
                 }
             if (store.state.user.isLogged)
                 store.commit('user/setNoticeCount', data.count)
-            // const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/mig
+            const regex = /<p><\/p>/gim
+            data.topic.content = data.topic.content.replace(regex, '<p><br></p>')
+            // const regex = /<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>/gim
             // data.topic.content = data.topic.content.replace(regex, `<img src="$1">`)
             return {
                 id,
@@ -360,6 +358,12 @@
             return {
                 title: `${this.topic.title} - 아이돌보드`,
                 meta: [
+                    { property: 'og:site_name', content: '아이돌보드' },
+                    { property: 'og:title', content: this.topic.title },
+                    { property: 'og:description', content: this.topic.content.substr(0, 200) },
+                    { property: 'og:image', content: `https://www.idolboard.com/profile/${this.topic.profile}` },
+                    { property: 'og:type', content: 'website' },
+                    { property: 'og:updated_time', content: this.topic.updated },
                     { hid: `${this.id}`, name: `${this.topic.content.substr(0, 100)}`, content: '아이돌보드 - 서브컬쳐 커뮤니티' }
                 ]
             }
@@ -376,34 +380,32 @@
         border-bottom: 1px solid #eee;
         background-color: #fff;
         > h6 {
-            height: 32px;
+            display: flex;
+            min-height: 32px;
             margin: 0;
-            padding: 5px;
+            padding: .5rem;
             color: #fff;
             border-bottom: 1px solid rgba(0, 0, 0, .1);
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             background-color: @primary;
+            > .category {
+                height: fit-content;
+                margin-right: 5px;
+                padding: 1px 5px;
+                color: @primary;
+                font-size: 12px;
+                font-weight: 700;
+                border-radius: 5px;
+                background-color: #f5f5f5;
+            }
             > .subject {
-                max-width: calc(100vw - 80px);
+                flex: 1;
                 font-size: 14px;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                > .category {
-                    display: inline-block;
-                    width: fit-content;
-                    padding: 4px 8px;
-                    color: @primary;
-                    font-size: 12px;
-                    font-weight: 700;
-                    border-radius: 4px;
-                    background-color: #f5f5f5;
-                }
             }
             > .regdate {
-                float: right;
-                > span { font-size: 11px }
+                margin-top: 2px;
+                font-size: 11px;
             }
         }
         > .profile {

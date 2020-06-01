@@ -551,7 +551,7 @@ module.exports.updateTopic = async ctx => {
         // TODO: 관리자 전용 커스텀
         if (color !== '')
             color = ''
-        if (isNotice > 0)
+        if (topic.isNotice < 1 && isNotice > 0)
             isNotice = 0
     }
     const isPoll = !poll.hide
