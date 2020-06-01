@@ -46,8 +46,10 @@
                 <div class='regdate'>
                     <span>{{ $moment(topic.created).fromNow() }}</span>
                 </div>
-                <div class='category' v-if='topic.category'>{{ topic.category }}</div>
-                <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>{{ topic.title }}</div>
+                <div class='subject' :style='topic.color !== "" ? `color: #${topic.color}` : ""'>
+                    <div class='category' v-if='topic.category'>{{ topic.category }}</div>
+                    {{ topic.title }}
+                </div>
             </h6>
             <div class='profile'>
                 <div class='image' v-if='topic.profile'>
@@ -376,30 +378,30 @@
         > h6 {
             height: 32px;
             margin: 0;
-            padding: .5rem;
+            padding: 5px;
             color: #fff;
             border-bottom: 1px solid rgba(0, 0, 0, .1);
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             background-color: @primary;
-            > .category {
-                display: inline-block;
-                padding: 4px 8px;
-                color: @primary;
-                font-size: 12px;
-                font-weight: 700;
-                border-radius: 4px;
-                background-color: #f5f5f5;
-            }
             > .subject {
                 max-width: calc(100vw - 80px);
                 font-size: 14px;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                > .category {
+                    display: inline-block;
+                    width: fit-content;
+                    padding: 4px 8px;
+                    color: @primary;
+                    font-size: 12px;
+                    font-weight: 700;
+                    border-radius: 4px;
+                    background-color: #f5f5f5;
+                }
             }
             > .regdate {
-                margin-top: -4px;
                 float: right;
                 > span { font-size: 11px }
             }

@@ -72,7 +72,7 @@
             }
         },
         async mounted() {
-            await this.$recaptcha.init()
+            // await this.$recaptcha.init()
         },
         created() {
             if (process.browser) {
@@ -106,11 +106,11 @@
                     return this.message = '비밀번호를 입력하세요.'
                 }
                 this.loading = true
-                const success = await this.checkRecaptcha()
-                if (!success) {
-                    this.loading = false
-                    return this.message = 'reCAPTCHA v3 인증에 실패했습니다.'
-                }
+                // const success = await this.checkRecaptcha()
+                // if (!success) {
+                //     this.loading = false
+                //     return this.message = 'reCAPTCHA v3 인증에 실패했습니다.'
+                // }
                 const data = await this.$axios.$post('/api/auth/signin', { username: this.form.username, password: this.form.password })
                 if (data.status === 'fail') {
                     this.loading = false
@@ -119,13 +119,13 @@
                 localStorage.setItem('tk', data.token)
                 location.href = '/'
             },
-            async checkRecaptcha() {
-                const token = await this.$recaptcha.execute('login')
-                if (!token)
-                    return false
-                const response = await this.$axios.post('/api/auth/recaptcha', { token })
-                return response.data.status === 'ok'
-            },
+            // async checkRecaptcha() {
+            //     const token = await this.$recaptcha.execute('login')
+            //     if (!token)
+            //         return false
+            //     const response = await this.$axios.post('/api/auth/recaptcha', { token })
+            //     return response.data.status === 'ok'
+            // },
             clear() {
                 this.state.username = null
                 this.state.password = null
