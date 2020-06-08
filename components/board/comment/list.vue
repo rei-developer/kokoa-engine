@@ -386,6 +386,7 @@
                                 > .sticker {
                                     width: 100px;
                                     height: 100px;
+                                    margin-top: 5px;
                                     > img { border-radius: 4px }
                                 }
                                 > span {
